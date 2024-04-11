@@ -19,8 +19,14 @@ defmodule PracticeWeb.Router do
 
   scope "/", HomeLive do
     live "/", Index
-
   end
+
+  scope "/", AboutLive do
+    live "/about-us", Index
+  end
+
+
+
 
     # get "/", PageController, :home
     # get "/users", PageController, :users
