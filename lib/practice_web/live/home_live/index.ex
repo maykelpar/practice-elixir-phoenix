@@ -4,7 +4,7 @@ defmodule PracticeWeb.HomeLive.Index do
   def render(assigns) do
     ~H"""
 
-<nav class="bg-gray-800">
+<nav class="bg-gray-800 border-b-4 border-sky-800 ">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center space-between">
       <%!-- <div class="absolute inset-y-0 left-0 flex items-center sm:hidden"> --%>
