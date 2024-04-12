@@ -21,8 +21,12 @@ defmodule PracticeWeb.Router do
     live "/", Index
   end
 
-  scope "/", AboutLive do
-    live "/about-us", Index
+  scope "/", ParentLive do
+    live "/parent-login", Index
+  end
+
+  scope "/", UserLive do
+    live "/user", Index
   end
 
 

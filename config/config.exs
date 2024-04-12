@@ -7,6 +7,17 @@
 # General application configuration
 import Config
 
+
+
+#Create database test
+config :practice, PracticeWeb.Repo,
+  database: "practice_dev",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  pool_size: 10
+
+
 config :practice,
   ecto_repos: [Practice.Repo],
   generators: [timestamp_type: :utc_datetime]
