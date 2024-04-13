@@ -34,11 +34,13 @@ defmodule PracticeWeb.CustomComponents do
           <%!-- </div> --%>
           <div class="max-w-7xl mx-auto flex flex-1 items-center justify-between">
             <div class="flex flex-shrink-0 items-center">
+            <.link navigate="/">
               <img
                 class="h-20 w-auto"
                 src="images/par.png"
                 alt="Your Company"
               />
+              </.link>
             </div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
@@ -50,10 +52,10 @@ defmodule PracticeWeb.CustomComponents do
                   Home
                 </.link>
                 <.link
-                  navigate="/about-us"
+                  navigate="/user"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
-                  About Me
+                  About The Project
                 </.link>
                 <a
                   href="#"
