@@ -33,6 +33,10 @@ defmodule PracticeWeb.Router do
     live "/about", Index
   end
 
+  scope "/", LandingPageLive do
+    live "/landingpage", Index
+  end
+
 
     # get "/", PageController, :home
     # get "/users", PageController, :users

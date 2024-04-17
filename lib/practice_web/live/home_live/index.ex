@@ -7,6 +7,8 @@ defmodule PracticeWeb.HomeLive.Index do
   alias Phoenix.LiveView.JS
   import PracticeWeb.CustomComponents
 
+
+
   def render(assigns) do
     ~H"""
     <.navbar />
@@ -19,7 +21,7 @@ defmodule PracticeWeb.HomeLive.Index do
 
         <div class="mt-36 space-x-6">
           <.link navigate="/parent-login" class="text-lg border rounded-lg px-6 py-2"> Guardian Login </.link>
-          <.link navigate="/user" class="text-lg border rounded-lg px-6 py-2"> User Login </.link>
+          <.link navigate="/user" class="text-lg border rounded-lg px-6 py-2"> Create User Login </.link>
 
         </div>
 
@@ -35,3 +37,5 @@ defmodule PracticeWeb.HomeLive.Index do
     """
   end
 end
+
+

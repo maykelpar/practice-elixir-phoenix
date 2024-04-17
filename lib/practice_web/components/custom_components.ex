@@ -57,12 +57,13 @@ defmodule PracticeWeb.CustomComponents do
                 >
                   About The Project
                 </.link>
-                <a
-                  href="#"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                >
-                  Contact
-                </a>
+                <.link
+  phx-click="toggle_modal"
+  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+>
+  Log Out
+</.link>
+
               </div>
             </div>
           </div>
