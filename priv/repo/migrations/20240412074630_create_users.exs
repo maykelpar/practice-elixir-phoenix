@@ -7,6 +7,7 @@ defmodule Practice.Repo.Migrations.CreateUsers do
       add :password, :string
 
 
+
       timestamps(type: :utc_datetime)
     end
   end

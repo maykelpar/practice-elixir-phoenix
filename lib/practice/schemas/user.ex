@@ -5,8 +5,7 @@ defmodule Practice.Schemas.User do
   schema "users" do
     field :name, :string
     field :password, :string
-
-
+    field :role, :string
     timestamps(type: :utc_datetime)
   end
 
@@ -20,8 +19,8 @@ defmodule Practice.Schemas.User do
         ) :: Ecto.Changeset.t()
   def changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:name, :password])
-    |> validate_required([:name, :password])
+    |> cast(params, [:name, :password, :role])
+    |> validate_required([:name, :password, :role])
 
   end
 end

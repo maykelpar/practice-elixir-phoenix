@@ -52,15 +52,14 @@ defmodule PracticeWeb.CustomComponents do
                   Home
                 </.link>
                 <.link
-                  navigate="/user"
+                  navigate="/admin"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
-                  About The Project
+                  Admin
                 </.link>
                 <.link
-  phx-click="toggle_modal"
-  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
->
+                navigate="/"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
   Log Out
 </.link>
 

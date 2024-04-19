@@ -7,6 +7,8 @@ defmodule PracticeWeb.ParentLive.Index do
   alias Practice.Schemas.User
   alias Practice.Repo
 
+  import Ecto.Query
+
   def render(assigns) do
     ~H"""
     <.navbar />
@@ -18,7 +20,7 @@ defmodule PracticeWeb.ParentLive.Index do
         </div>
 
         <div class="space-y-10">
-          <p>Parent Login</p>
+          <p>Guardian Login</p>
           <.form phx-submit="login" class="space-y-6">
             <div class="space-y-2">
             <label for="name" class="text-2xl"> Enter your username </label>
@@ -60,25 +62,27 @@ defmodule PracticeWeb.ParentLive.Index do
         socket
       ) do
     case authenticate_user(name, password) do
-      {:ok, user} ->
+       {:ok, user} ->
         {:noreply, socket
         |> put_flash(:info, "Test")
         |> push_navigate(to: "/landingpage")
       }
       {:error} ->
-        {:noreply, assign(socket, error: "Invalid Credentials")}
+        {:noreply, assign(socket, :error, "Invalid Credentials")}
+
+        _ ->
+          {:noreply,
+           socket
+            |> put_flash(:error, "Invalid")}
+
+          nil ->
+              {:noreply, assign(socket, :error, "Invalid Credentials")}
     end
   end
 
   defp authenticate_user(name, password) do
-    case Repo.get_by(User, name: name) do
-      nil ->
-        :error
-
-      user ->
-        if user.password == password do
-          {:ok, user}
-        end
-    end
+    User
+    |> where([u], u.name == ^name and u.password == ^password and u.role == "Guardian")
+    |> Repo.one()
   end
 end
