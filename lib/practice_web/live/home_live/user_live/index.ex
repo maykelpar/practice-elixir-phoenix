@@ -54,7 +54,6 @@ defmodule PracticeWeb.UserLive.Index do
         </div>
       </div>
 
-      <.modal/>
     </div>
     """
   end
