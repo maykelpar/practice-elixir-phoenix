@@ -62,27 +62,33 @@ defmodule PracticeWeb.ParentLive.Index do
         socket
       ) do
     case authenticate_user(name, password) do
-       {:ok, user} ->
+      %Practice.Schemas.User{}
+        ->
         {:noreply, socket
+
         |> put_flash(:info, "Test")
         |> push_navigate(to: "/landingpage")
       }
-      {:error} ->
-        {:noreply, assign(socket, :error, "Invalid Credentials")}
 
         _ ->
           {:noreply,
            socket
             |> put_flash(:error, "Invalid")}
+        nil ->
+            {:noreply, assign(socket, :error, "Invalid Credentials")}
 
-          nil ->
-              {:noreply, assign(socket, :error, "Invalid Credentials")}
-    end
+        end |> IO.inspect(label: "test")
   end
+
 
   defp authenticate_user(name, password) do
     User
     |> where([u], u.name == ^name and u.password == ^password and u.role == "Guardian")
     |> Repo.one()
-  end
+    |> IO.inspect()
+
+    end
+
+
+
 end

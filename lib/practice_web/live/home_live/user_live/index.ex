@@ -3,7 +3,7 @@ defmodule PracticeWeb.UserLive.Index do
 
   alias Phoenix.LiveView.JS
   import PracticeWeb.CustomComponents
-  import PracticeWeb.CoreComponents
+
 
   alias Practice.Schemas.User
   alias Practice.Repo
@@ -44,11 +44,10 @@ defmodule PracticeWeb.UserLive.Index do
                 class="text-gray-800 w-full rounded-md"
               />
             </div>
-            <button class="rounded-md border px-6 py-2 text-xl hover hover:bg-blue-100 hover:text-black">
+            <button class="rounded-md  border px-6 py-2 text-xl hover hover:bg-blue-100 hover:text-black">
               Log in
             </button>
           </.form>
-
 
           <%!-- Display error message if present --%>
         </div>
@@ -64,14 +63,13 @@ defmodule PracticeWeb.UserLive.Index do
         socket
       ) do
     case authenticate_user(name, password) do
-      {:ok, user} ->
+      %Practice.Schemas.User{}
+        ->
         {:noreply, socket
+
         |> put_flash(:info, "Test")
         |> push_navigate(to: "/landingpage")
       }
-      {:error} ->
-        {:noreply, assign(socket, :error, "Invalid Credentials")}
-
 
         _ ->
           {:noreply,
@@ -79,15 +77,17 @@ defmodule PracticeWeb.UserLive.Index do
             |> put_flash(:error, "Invalid")}
         nil ->
             {:noreply, assign(socket, :error, "Invalid Credentials")}
-        end
-  end
 
+        end |> IO.inspect(label: "test")
+  end
 
 
   defp authenticate_user(name, password) do
     User
     |> where([u], u.name == ^name and u.password == ^password and u.role == "Admin")
     |> Repo.one()
+    |> IO.inspect()
+
     end
 
 
