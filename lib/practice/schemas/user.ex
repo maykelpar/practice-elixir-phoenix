@@ -5,7 +5,6 @@ defmodule Practice.Schemas.User do
   schema "users" do
     field :name, :string
     field :password, :string
-    field :role, :string
     timestamps(type: :utc_datetime)
   end
 
@@ -20,7 +19,7 @@ defmodule Practice.Schemas.User do
   def changeset(user, params \\ %{}) do
     user
     |> cast(params, [:name, :password, :role])
-    |> validate_required([:name, :password, :role])
+    |> validate_required([:name, :password])
 
   end
 end
