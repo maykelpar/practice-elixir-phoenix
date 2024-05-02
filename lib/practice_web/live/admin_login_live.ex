@@ -2,6 +2,7 @@ defmodule PracticeWeb.AdminLoginLive do
   use PracticeWeb, :live_view
 
   def render(assigns) do
+    IO.inspect(assigns)
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
@@ -19,9 +20,6 @@ defmodule PracticeWeb.AdminLoginLive do
         <.input field={@form[:email]} type="email" label="Email" required />
         <.input field={@form[:password]} type="password" label="Password" required />
         <.input field={@form[:role]} type="select" options = {["Admin", "User"]} label="Role" required />
-
-
-
         <:actions>
           <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
           <.link href={~p"/users/reset_password"} class="text-sm font-semibold">

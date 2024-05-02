@@ -8,7 +8,7 @@ defmodule PracticeWeb.LogoutModal do
 
   def render(assigns) do
     ~H"""
-    <div phx-modal="id: logout-modal" show={@visible}>
+    <div phx-modal="id:logout-modal" show={@visible}>
       <p>Are you sure you want to log out?</p>
       <button type="button" phx-click="close" class="btn btn-secondary">No</button>
       <button type="button" phx-click="logout" class="btn btn-primary">Yes</button>
@@ -16,6 +16,7 @@ defmodule PracticeWeb.LogoutModal do
     """
   end
 
+  @spec handle_event(<<_::40, _::_*8>>, any(), any()) :: {:noreply, any()}
   def handle_event("close", _, socket) do
     socket = assign(socket, visible: false)
     {:noreply, socket}

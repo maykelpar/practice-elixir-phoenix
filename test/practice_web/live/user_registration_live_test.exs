@@ -73,7 +73,7 @@ defmodule PracticeWeb.UserRegistrationLiveTest do
 
   describe "registration navigation" do
     test "redirects to login page when the Log in button is clicked", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/register")
+      {:ok, lv, _html} = live(conn, "/landingpage")
 
       {:ok, _login_live, login_html} =
         lv

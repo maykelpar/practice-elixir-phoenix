@@ -128,7 +128,7 @@ defmodule PracticeWeb.UserAuth do
   ## Examples
 
   Use the `on_mount` lifecycle macro in LiveViews to mount or authenticate
-  the current_user:
+  the current_user:x
 
       defmodule PracticeWeb.PageLive do
         use PracticeWeb, :live_view
@@ -223,5 +223,5 @@ defmodule PracticeWeb.UserAuth do
 
   defp maybe_store_return_to(conn), do: conn
 
-  defp signed_in_path(_conn), do: ~p"/"
+  defp signed_in_path(_conn), do: ~p"/landingpage"
 end

@@ -36,9 +36,6 @@ defmodule PracticeWeb.Router do
     live "/about", Index
   end
 
-  scope "/", LandingPageLive do
-    live "/landingpage", Index
-  end
 
   scope "/", AdminLive do
     live "/admin", Index
@@ -94,10 +91,19 @@ defmodule PracticeWeb.Router do
   scope "/", PracticeWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live_session :require_admin_user,
+      on_mount: [{PracticeWeb.UserAuth, :ensure_admin_user}] do
+
+    end
+
     live_session :require_authenticated_user,
       on_mount: [{PracticeWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      scope "/", LandingPageLive do
+        live "/landingpage", Index
+      end
     end
   end
 

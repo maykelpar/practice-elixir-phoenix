@@ -168,29 +168,31 @@ defmodule PracticeWeb.CoreComponents do
           <%!-- </div> --%>
           <div class="max-w-7xl mx-auto flex flex-1 items-center justify-between">
             <div class="flex flex-shrink-0 items-center">
-              <.link navigate="/">
-                <img class="h-20 w-auto" src="images/par.png" alt="Your Company" />
+              <.link navigate="/landingpage">
+                <img class="h-20 w-auto" src="/images/par.png" alt="Your Company" />
               </.link>
             </div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
                 <%= if @current_user != %{} do %>
-                <li class="text-[0.8125rem] leading-6 text-zinc-900">
+
+                <p class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                Good Day!,
                 <%= @current_user.email %>
-               </li>
+               </p>
                 <.link
                   navigate="/users/settings"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-mediums"
+                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Settings
                 </.link>
-                <.link
-                  href="/users/log_out"
-                  method="delete"
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                <button
+                phx-click={show_modal("logout-modal")}
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
-                  Logout
-                </.link>
+                 Log Out
+
+                </button>
 
                 <% else %>
 
@@ -200,12 +202,7 @@ defmodule PracticeWeb.CoreComponents do
                 >
                   Register
                 </.link>
-                <.link
-                navigate="/users/log_in"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium border rounded-md"
-                >
-                  Log In
-                </.link>
+
                 <% end %>
               </div>
             </div>
@@ -214,10 +211,27 @@ defmodule PracticeWeb.CoreComponents do
       </div>
       <!-- Mobile menu, show/hide based on menu state. -->
     </nav>
-    <%!--
-    <.logout_modal /> --%>
+
+
+    <.modal id= "logout-modal">
+     <div>
+      <p class="text-2xl">Are you sure you want to log out?</p>
+
+      <div class="space-x-10 mt-10">
+      <.link href= "/users/log_out" method="delete" class="border bg-blue-400 rounded-md px-8 py-2 text-xl hover:bg-blue-700 hover:text-white">Yes</.link>
+      <button class="border bg-blue-400 rounded-md px-8 py-2 text-xl hover:bg-blue-700 hover:text-white" type="button" phx-click={hide_modal("logout-modal")}>No</button>
+      </div>
+    </div>
+
+    </.modal>
     """
   end
+
+
+
+
+
+
 
   @doc """
   Shows the flash group with standard titles and content.
@@ -516,10 +530,10 @@ defmodule PracticeWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-zinc-800">
+        <h1 class="text-lg font-semibold leading-8 text-white mt-6">
           <%= render_slot(@inner_block) %>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-white">
           <%= render_slot(@subtitle) %>
         </p>
       </div>
