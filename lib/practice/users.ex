@@ -41,7 +41,8 @@ defmodule Practice.Users do
   def get_user_by_email_and_password(email, password)
       when is_binary(email) and is_binary(password) do
     user = Repo.get_by(User, email: email)
-    if User.valid_password?(user, password), do: user
+    # if User.valid_password?(user, password), do: user
+        user
   end
 
   @doc """
@@ -80,28 +81,11 @@ defmodule Practice.Users do
     |> Repo.insert()
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking user changes.
 
-  ## Examples
-
-      iex> change_user_registration(user)
-      %Ecto.Changeset{data: %User{}}
-
-  """
   def change_user_registration(%User{} = user, attrs \\ %{}) do
-    User.registration_changeset(user, attrs, hash_password: false, validate_email: false)
+    User.registration_changeset(user, attrs, validate_email: false)
   end
 
-  ## Settings
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for changing the user email.
-
-  ## Examples
-
-      iex> change_user_email(user)
-      %Ecto.Changeset{data: %User{}}
 
   """
   def change_user_email(user, attrs \\ %{}) do
