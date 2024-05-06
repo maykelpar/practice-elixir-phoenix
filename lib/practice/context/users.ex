@@ -1,4 +1,4 @@
-defmodule Practice.Users do
+defmodule Practice.Context.Users do
   @moduledoc """
   The Users context.
   """
@@ -6,7 +6,10 @@ defmodule Practice.Users do
   import Ecto.Query, warn: false
   alias Practice.Repo
 
-  alias Practice.Users.{User, UserToken, UserNotifier}
+  alias Practice.Schemas.Blogs
+
+  alias Practice.Context.{UserToken, UserNotifier}
+  alias Practice.Schemas.User
 
   ## Database getters
 
@@ -76,13 +79,13 @@ defmodule Practice.Users do
 
   """
   def register_user(attrs) do
-    %User{}
+    %Practice.Schemas.User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
 
 
-  def change_user_registration(%User{} = user, attrs \\ %{}) do
+  def change_user_registration(%Practice.Schemas.User{} = user, attrs \\ %{}) do
     User.registration_changeset(user, attrs, validate_email: false)
   end
 

@@ -1,7 +1,7 @@
-defmodule Practice.Users.UserToken do
+defmodule Practice.Context.UserToken do
   use Ecto.Schema
   import Ecto.Query
-  alias Practice.Users.UserToken
+  alias Practice.Context.UserToken
 
   @hash_algorithm :sha256
   @rand_size 32
@@ -17,7 +17,7 @@ defmodule Practice.Users.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, Practice.Users.User
+    belongs_to :user, Practice.Schemas.User
 
     timestamps(updated_at: false)
   end

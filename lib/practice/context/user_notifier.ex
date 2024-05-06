@@ -1,4 +1,4 @@
-defmodule Practice.Users.UserNotifier do
+defmodule Practice.Context.UserNotifier do
   import Swoosh.Email
 
   alias Practice.Mailer

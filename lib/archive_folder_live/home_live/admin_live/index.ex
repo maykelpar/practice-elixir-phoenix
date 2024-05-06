@@ -3,7 +3,7 @@ defmodule PracticeWeb.AdminLive.Index do
 
   use Phoenix.Component
 
-  alias Practice.Context.User
+  alias Practice.Context.Users
   alias Practice.Repo
 
   alias Phoenix.LiveView.JS
@@ -19,7 +19,7 @@ defmodule PracticeWeb.AdminLive.Index do
   # end
 
   def handle_params(params, _session, socket) do
-    changeset = Practice.Context.User.create_user(params)
+    changeset = Practice.Context.Users.create_user(params)
     {:noreply, socket |> assign_form(changeset)}
   end
 

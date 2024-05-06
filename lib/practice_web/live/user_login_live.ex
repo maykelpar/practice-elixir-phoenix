@@ -1,6 +1,8 @@
 defmodule PracticeWeb.UserLoginLive do
   use PracticeWeb, :live_view
 
+
+
   def render(assigns) do
 
     IO.inspect(assigns)

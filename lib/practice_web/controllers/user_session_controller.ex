@@ -1,8 +1,9 @@
 defmodule PracticeWeb.UserSessionController do
   use PracticeWeb, :controller
 
-  alias Practice.Users
+  alias Practice.Context.Users
   alias PracticeWeb.UserAuth
+
 
   def create(conn, %{"_action" => "registered"} = params) do
     create(conn, params, "Account created successfully!")

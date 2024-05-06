@@ -4,7 +4,7 @@ defmodule PracticeWeb.UserForgotPasswordLiveTest do
   import Phoenix.LiveViewTest
   import Practice.UsersFixtures
 
-  alias Practice.Users
+  alias Practice.Context.Users
   alias Practice.Repo
 
   describe "Forgot password page" do

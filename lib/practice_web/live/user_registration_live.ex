@@ -1,8 +1,10 @@
 defmodule PracticeWeb.UserRegistrationLive do
   use PracticeWeb, :live_view
 
-  alias Practice.Users
-  alias Practice.Users.User
+  alias Practice.Context.Users
+  alias Practice.Schemas.User
+
+
 
   def render(assigns) do
     ~H"""

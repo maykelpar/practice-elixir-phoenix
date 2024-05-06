@@ -5,7 +5,7 @@ defmodule Practice.Repo.Migrations.Create_User do
       create table(:users) do
         add :email, :citext, null: false
         add :role, :string, null: false
-        add :password, :string, null: false
+        add :hashed_password, :string, null: false
         add :confirmed_at, :naive_datetime
         timestamps(type: :utc_datetime)
       end
