@@ -5,6 +5,7 @@ defmodule Practice.Context.Blogs do
 
 
   alias Practice.Schemas.Blogs
+  alias Practice.Schemas.User
 
 
   def create_blogs(params, struct \\ %Blogs{}) do
@@ -20,7 +21,7 @@ defmodule Practice.Context.Blogs do
 
   def register_blogs(attrs) do
     %Practice.Schemas.Blogs{}
-    |> Blog.registration_changeset(attrs)
+    |> Blogs.registration_changeset(attrs)
     |> Repo.insert()
   end
 

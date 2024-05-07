@@ -3,63 +3,94 @@ defmodule PracticeWeb.LandingPageLive.Index do
 
   use Phoenix.Component
 
-
   alias Practice.Context.Blogs
-
 
   alias Phoenix.LiveView.JS
   import PracticeWeb.CustomComponents
 
-
   def handle_params(params, _session, socket) do
-    changeset = Blogs.create_blogs(params)
+    changeset = Practice.Context.Blogs.create_blogs(params)
     {:noreply, socket |> assign_form(changeset)}
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
-  assign(socket, :form, to_form(changeset))
+    assign(socket, :form, to_form(changeset))
   end
 
-  def handle_event("validate", %{"blogs" => blog_params}, socket) do
-     changeset = Blogs.change_blog_registration(%Blog{}, blog_params)
-     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
+  def handle_event("validate", %{"blogs" => blogs_params} = params, socket) do
+    changeset =
+      blogs_params
+      |> Blogs.create_blogs()
+      |> IO.inspect(label: "validate")
 
+    {:noreply,
+     socket
+     |> assign(:changeset, changeset)
+     |> assign(:params, params)
+     |> assign_form(changeset)}
+  end
+
+  def handle_event("save", %{"blogs" => blogs_params} = params, socket) do
+    IO.inspect(params)
+    changeset = socket.assigns.changeset
+
+    if changeset.valid? do
+      case Blogs.insert_blogs(changeset) do
+        {:ok, _user} ->
+          {:noreply,
+           socket
+           |> put_flash(:info, "Blogs Submitted Successfully!")
+           |> push_navigate(to: "/landingpage")}
+
+        {:error, _blogs} ->
+          {:noreply, socket}
+      end
+    else
+      {:noreply, socket}
     end
-
-
-
+  end
 
   def render(assigns) do
-  ~H"""
+    ~H"""
+    <div class="max-w-7xl mx-auto flex flex-cols-2 space-between mt-20 text-gray-300 text-4xl items-center justify-between">
+      <%!--
+      <button
+        phx-click={show_modal("add_blog")}
+        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+      >
+        Log Out
+      </button> --%>
 
+      <div class="items-center inline-block space-y-5">
+        <img src="/images/leng.png" class="h-[100], w-96" />
+        <p>Add Post</p>
+      </div>
 
-  <div class="max-w-7xl mx-auto mt-20 text-gray-300 text-4xl items-center">
-   <p> Welcome, <%= @current_user.email %> </p>
+      <div class="items-center inline-block space-y-5">
+        <img src="/images/kween.png" class="h-[100], w-72" />
+        <p>View Posts</p>
+      </div>
+    </div>
 
-   <.simple_form
+    <.modal id="add_blog">
+      <.simple_form
         for={@form}
         id="submit_blogs"
         phx-submit="save"
         phx-change="validate"
-        class = "bg-blue-500"
+        class="bg-blue-500"
       >
         <%!-- <.error :if={@check_errors}>
-          Oops, something went wrong! Please check the errors below.
-        </.error> --%>
+            Oops, something went wrong! Please check the errors below.
+          </.error> --%>
 
-        <.input field={@form[:title]} type="text" label="Email" required />
-        <.input field={@form[:content]} type="textarea" label="Password" required />
+        <.input field={@form[:user_id]} type="hidden" value={@current_user.id} />
+        <.input field={@form[:title]} type="text" label="Title" required />
+        <.input field={@form[:content]} type="textarea" label="Content" required />
 
-
-        <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
-        </:actions>
+        <.button phx-submit="save" class="w-full">Save</.button>
       </.simple_form>
-
-
-
-  </div>
-
-  """
+    </.modal>
+    """
   end
 end

@@ -4,8 +4,6 @@ defmodule PracticeWeb.UserRegistrationLive do
   alias Practice.Context.Users
   alias Practice.Schemas.User
 
-
-
   def render(assigns) do
     ~H"""
     <div class="mx-auto max-w-sm">
@@ -28,7 +26,7 @@ defmodule PracticeWeb.UserRegistrationLive do
         phx-trigger-action={@trigger_submit}
         action={~p"/users/log_in?_action=registered"}
         method="post"
-        class = "bg-blue-500"
+        class="bg-blue-500"
       >
         <.error :if={@check_errors}>
           Oops, something went wrong! Please check the errors below.
@@ -36,11 +34,7 @@ defmodule PracticeWeb.UserRegistrationLive do
 
         <.input field={@form[:email]} type="email" label="Email" required />
         <.input field={@form[:password]} type="password" label="Password" required />
-        <.input field={@form[:role]} type="select" label="Role" options= {["Admin", "User"]} required />
-
-
-
-
+        <.input field={@form[:role]} type="select" label="Role" options={["Admin", "User"]} required />
 
         <:actions>
           <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
